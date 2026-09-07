@@ -11,23 +11,25 @@
 @media(max-width:850px){.layout{grid-template-columns:1fr}.sidebar{display:grid;grid-template-columns:1fr 1fr;gap:16px}.sidebar .card{margin:0}.sidebar .note{grid-column:1/-1}.stage{min-height:210px}}
 @media(max-width:520px){main{padding:20px 14px}.brand{font-size:17px}header .pill{font-size:12px;padding:8px 11px}.stage{padding:23px}.stage h1{font-size:24px}.avatar{font-size:65px}.sidebar{grid-template-columns:1fr}.card{padding:20px}.word{font-size:34px}.actions button{flex:1}.stage p{font-size:13px}}
 @media(prefers-reduced-motion:reduce){*,*:before{animation:none!important;transition:none!important}}
+.course-picker{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;margin-top:22px}.course-picker label,#variantControl label{font-size:13px;color:#756c88}.course-picker .wide{grid-column:1/-1}select{display:block;width:100%;max-width:100%;min-width:0;padding:12px 10px;border:1px solid #e5dbee;border-radius:12px;background:#faf7ff;color:#392b50;font:inherit;font-size:15px;min-height:48px;margin-top:6px}select:focus-visible{outline:3px solid #7954cd;outline-offset:2px}.layout>*,.course-picker>*{min-width:0}#variantControl{max-width:100%;text-align:left;margin:14px 0}.source{font-size:12px;color:#84738f}.word.sentence{font-size:clamp(23px,3vw,32px);line-height:1.5;letter-spacing:0;overflow-wrap:anywhere}.meaning{line-height:1.6}.option{overflow-wrap:anywhere;line-height:1.5}#groupProgress{font-size:13px;text-align:left}.emoji{font-size:60px;margin-top:8px}@media(max-width:520px){.course-picker{grid-template-columns:1fr}.options{grid-template-columns:1fr}.word{overflow-wrap:anywhere}}
+@media(max-width:520px){.actions{display:grid;grid-template-columns:1fr;width:100%}.actions button{width:100%;white-space:nowrap}.nav{display:grid;grid-template-columns:1fr 1fr;gap:8px}.nav small{grid-column:1/-1;grid-row:2;text-align:center}.nav button{white-space:nowrap;padding:12px 8px}.stage h1{font-size:22px}.avatar{font-size:54px}}
 </style></head>
 <body><main>
 <header><div class="brand">✦ MINA <span>ACADEMY</span></div><div class="pill">🎧 我的英文練習室</div></header>
 <div class="layout"><section>
 <div class="stage"><div><div class="tag">YOUR DEBUT STARTS HERE</div><h1>每一句英文，<br>都讓舞台更靠近一點。</h1><p id="minaText">我是 Mina！今天一起練習，閃閃發光吧。 ✨</p></div><div class="avatar" aria-hidden="true">👩🏻‍🎤</div></div>
-<div class="card wordcard"><div class="section-title"><h2>🎙️ Vocal Lab · 單字練習</h2><small id="position"></small></div>
-<div class="divider"><div class="lesson-label">LISTEN · SAY · SHINE</div><div class="emoji" id="emoji"></div><div class="word" id="word"></div><div class="meaning" id="meaning"></div>
+<div class="card wordcard"><div class="section-title"><h2>🎙️ Vocal Lab · 英文練習</h2><small id="position"></small></div>
+<div class="course-picker"><label>練習舞台<select id="kind"><option value="word">🎧 單字練習</option><option value="daily">💬 生活用語</option><option value="pattern">🎙️ 句型練習</option></select></label><label>今天的主題<select id="group"></select></label><label class="wide">選一張練習卡<select id="lesson"></select></label></div><p id="groupProgress" class="muted"></p><div class="divider"><div class="lesson-label">LISTEN · SAY · SHINE</div><div class="emoji" id="emoji"></div><div class="word" id="word"></div><div class="meaning" id="meaning"></div><div id="variantControl" hidden><label for="variant">這一組的不同說法</label><select id="variant"></select></div><p id="source" class="source"></p>
 <div class="actions"><button id="listen">🔊 聽發音</button><button id="know" class="pink">🎤 我跟著唸了</button><button id="challenge" class="primary">✦ 舞台小挑戰</button></div>
 <div id="quizArea" hidden><p id="question"></p><div id="options" class="options"></div><div id="feedback" role="status" aria-live="polite"></div></div>
 <div class="nav"><button id="previous" aria-label="上一個單字">← 上一個</button><small>練習一點點，也很棒</small><button id="next">下一個 →</button></div></div></div>
 </section><aside class="sidebar">
 <div class="card"><div class="section-title"><h2>🌟 我的出道之路</h2><small>TRAINEE PASS</small></div><div class="level" id="level"></div><small id="nextLevel"></small><div class="progress" role="progressbar" aria-label="舞台升級進度" aria-valuemin="0" aria-valuemax="100" id="levelProgress"><div id="levelBar"></div></div><div class="stats"><div class="stat">⭐ 星光值<strong id="stars">0</strong></div><div class="stat">💗 勇氣值<strong id="courage">0</strong></div></div></div>
 <div class="card"><div class="section-title"><h2>📝 今天的練習單</h2><small>慢慢來就好</small></div>
-<div class="mission"><div class="mission-icon">🎧</div><div class="mission-text">聽懂舞台的聲音<small>聽 3 個不同單字</small></div><div id="listenCount" class="check"></div></div>
-<div class="mission"><div class="mission-icon">🎤</div><div class="mission-text">勇敢開口練習<small>跟唸 3 個不同單字</small></div><div id="sayCount" class="check"></div></div>
-<div class="mission"><div class="mission-icon">✨</div><div class="mission-text">完成舞台小挑戰<small>答對 3 個不同單字</small></div><div id="quizCount" class="check"></div></div>
+<div class="mission"><div class="mission-icon">🎧</div><div class="mission-text">聽懂舞台的聲音<small>聽 3 張不同練習卡</small></div><div id="listenCount" class="check"></div></div>
+<div class="mission"><div class="mission-icon">🎤</div><div class="mission-text">勇敢開口練習<small>跟唸 3 張不同練習卡</small></div><div id="sayCount" class="check"></div></div>
+<div class="mission"><div class="mission-icon">✨</div><div class="mission-text">完成舞台小挑戰<small>答對 3 張不同練習卡</small></div><div id="quizCount" class="check"></div></div>
 <div class="divider"><small id="dailyMessage">完成三項任務，解鎖今日安可舞台 ✨</small></div></div>
 <div class="note">💌 Mina 的小提醒<br>答錯也沒關係，聽一次、再試一次。<br>今天練完了，就讓嗓子休息一下吧！</div>
 </aside></div><footer>MADE FOR YOUR LITTLE SUPERSTAR · 不用登入，進度自動保存在這個裝置</footer><p id="storageWarning" role="status"></p>
-</main><div id="toast" role="status" aria-live="polite"></div><script src="app.js"></script></body></html>
+</main><div id="toast" role="status" aria-live="polite"></div><script src="curriculum.js"></script><script src="app.js"></script></body></html>

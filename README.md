@@ -1,8 +1,10 @@
-# Mina English Academy
+# Mina Academy · K-pop 練習生版
 
-iPad-friendly English learning PWA.
+免登入的英文學習 PWA。保留原本 31 個單字、minaState 與 minaIndex 進度。
 
-## Publish with GitHub Pages
-Settings → Pages → Deploy from a branch → main / root → Save.
+新增出道等級、每日聽音／跟唸／答題任務、連答獎勵與完成特效。跟唸是孩子自行確認，不錄音或評分。聽音任務在瀏覽器回報播放結束後計入；語音是否可離線使用取決於裝置語音。
 
-On iPad: open the Pages URL in Safari → Share → Add to Home Screen.
+部署：將本資料夾全部檔案放在 GitHub Pages 網站根目錄。新版 Service Worker 會更新 mina- 前綴的舊快取。已開啟的舊頁面可能需要關閉重開或重新整理。
+
+進度只儲存於同一網站來源的 localStorage；本機預覽與正式網站的資料不共用。每日任务依裝置本地日期重設，累積星光與勇氣保留。
+

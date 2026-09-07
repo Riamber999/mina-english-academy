@@ -1,91 +1,33 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#fff7fb">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Mina English">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon.svg">
-<title>Mina's English Academy</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f8f5ff"><meta name="apple-mobile-web-app-capable" content="yes">
+<title>Mina · 我的出道練習室</title><link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon.svg">
 <style>
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#fff7fb;color:#2a2433}
-.app{max-width:760px;margin:auto;padding:16px 16px 110px}
-.card{background:white;border:1px solid #eadfeb;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 8px 24px rgba(80,50,100,.08)}
-h1{font-size:24px;margin:0 0 6px}.muted{color:#756b80}
-.hero{display:grid;grid-template-columns:84px 1fr;gap:12px;align-items:center}
-.mina{width:84px;height:84px;border-radius:22px;background:linear-gradient(135deg,#ff9ac7,#9b84ff);display:flex;align-items:center;justify-content:center;font-size:42px}
-.word{text-align:center;font-size:40px;font-weight:900;margin:12px 0}.emoji{text-align:center;font-size:76px}
-.zh{text-align:center;font-size:22px}.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}
-button{border:0;border-radius:16px;padding:13px 16px;font-size:17px;font-weight:800;background:#eee8f5}
-.primary{background:linear-gradient(135deg,#ff6fae,#7b61ff);color:#fff}
-.options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.option{background:#fff;border:2px solid #eadfeb}.good{border-color:#20a66a;background:#ecfff6}.bad{border-color:#d94c66;background:#fff0f3}
-.footer{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.94);border-top:1px solid #eadfeb;padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;gap:10px;justify-content:center}
-.footer button{flex:1;max-width:280px}
-.stats{display:flex;gap:8px;margin-top:10px}.pill{background:#fff;border:1px solid #eadfeb;border-radius:999px;padding:8px 10px;font-weight:700}
-</style>
-</head>
-<body>
-<div class="app">
-  <div class="card">
-    <h1>🎤 Mina's English Academy</h1>
-    <div class="muted">K-pop 練習生英文任務</div>
-    <div class="stats"><div class="pill">⭐ <span id="stars">0</span></div><div class="pill">💗 Courage <span id="courage">0</span></div></div>
-  </div>
-
-  <div class="card hero">
-    <div class="mina">👩🏻‍🎤</div>
-    <div><b>Mina：</b><span id="minaText">Hi! Let's learn English together.</span>
-      <div class="row" style="justify-content:flex-start"><button onclick="speakCurrent()">🔊 聽發音</button></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="emoji" id="emoji">🍎</div>
-    <div class="word" id="word">apple</div>
-    <div class="zh" id="zh">蘋果</div>
-    <div class="row">
-      <button onclick="markKnow()">👍 我會了</button>
-      <button class="primary" onclick="quiz()">🎯 小挑戰</button>
-    </div>
-    <div id="quizArea"></div>
-  </div>
-</div>
-
-<div class="footer">
-<button onclick="prevWord()">← 上一個</button>
-<button class="primary" onclick="nextWord()">下一個 →</button>
-</div>
-
-<script>
-const words=[
-["👦","boy","男孩"],["🤝","friend","朋友"],["👧","girl","女孩"],["🧑‍🏫","teacher","教師"],
-["🧑‍⚕️","doctor","醫生"],["🧒","kid","小孩"],["🎓","student","學生"],["👦🏻","brother","兄弟"],
-["👨","father / dad","爸爸"],["👩","mother / mom","媽媽"],["👧🏻","sister","姐妹"],["👵","grandma","奶奶、外婆"],
-["👴","grandpa","爺爺、外公"],["🍎","apple","蘋果"],["🍌","banana","香蕉"],["🍰","cake","蛋糕"],
-["🥚","egg","蛋"],["🥛","milk","牛奶"],["🍚","rice","米、飯"],["🍵","tea","茶"],["💧","water","水"],
-["🧃","juice","果汁"],["🍔","hamburger","漢堡"],["🍨","ice cream","冰淇淋"],["🍊","orange","柳丁"],
-["🍕","pizza","披薩"],["🌅","breakfast","早餐"],["☀️","lunch","午餐"],["🌙","dinner","晚餐"],["🎒","bag","書包"],["⚽","ball","球"]
-];
-const state=JSON.parse(localStorage.getItem("minaState")||'{"stars":0,"courage":0}');
-let i=Number(localStorage.getItem("minaIndex")||0);
-function save(){localStorage.setItem("minaState",JSON.stringify(state));localStorage.setItem("minaIndex",i);renderStats()}
-function renderStats(){stars.textContent=state.stars;courage.textContent=state.courage}
-function render(){const w=words[i];emoji.textContent=w[0];word.textContent=w[1];zh.textContent=w[2];minaText.textContent=`Listen and say: ${w[1]}. 中文是「${w[2]}」。`;quizArea.innerHTML=""}
-function nextWord(){i=(i+1)%words.length;render();save()}
-function prevWord(){i=(i-1+words.length)%words.length;render();save()}
-function speakCurrent(){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(words[i][1].replace(" / "," or "));u.lang="en-US";u.rate=.9;u.pitch=1.05;speechSynthesis.speak(u)}
-function markKnow(){state.stars++;state.courage++;save();minaText.textContent="Great job! 再練一次會更熟。"}
-function quiz(){
- const target=words[i]; const picks=[target];
- while(picks.length<4){const w=words[Math.floor(Math.random()*words.length)]; if(!picks.includes(w))picks.push(w)}
- picks.sort(()=>Math.random()-.5);
- quizArea.innerHTML=`<div style="margin-top:18px;text-align:center;font-weight:800">哪一個是「${target[2]}」？</div><div class="options">${picks.map(w=>`<button class="option" onclick="answer(this,'${w[1].replaceAll("'","\'")}','${target[1].replaceAll("'","\'")}')">${w[1]}</button>`).join("")}</div><div id="fb" style="text-align:center;font-weight:800;margin-top:10px"></div>`;
-}
-function answer(btn,a,t){if(a===t){btn.classList.add("good");fb.textContent="✅ Correct!";state.stars+=2;state.courage+=2}else{btn.classList.add("bad");fb.textContent=`答案是 ${t}`;state.courage++}save()}
-if("serviceWorker" in navigator){addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
-renderStats();render();
-</script>
-</body></html>
+:root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#29223f;background:#f8f5ff;font-synthesis:none}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 85% 0,#ffe0ec,transparent 50%),#f8f5ff}button{font:inherit;cursor:pointer;min-height:48px;border:0;border-radius:16px;padding:13px 19px;font-weight:750;color:inherit;background:#f0ebff;touch-action:manipulation}button:hover{filter:brightness(.97)}button:focus-visible{outline:3px solid #6949cd;outline-offset:4px}button:disabled{cursor:default;opacity:.65}main{max-width:1140px;margin:auto;padding:30px 26px 44px}header,.row,.section-title{display:flex;align-items:center;justify-content:space-between;gap:12px}header{margin-bottom:28px}.brand{font-size:21px;font-weight:900;letter-spacing:-.5px}.brand span{color:#8761cc}small,.muted{color:#756c88}.tag{font-size:13px;letter-spacing:2px;font-weight:800;color:#b497f2}.pill{background:#fff;padding:10px 15px;border-radius:30px;font-size:14px;font-weight:750}.layout{display:grid;grid-template-columns:1fr 320px;gap:22px}.stage{position:relative;overflow:hidden;border-radius:28px;padding:30px;background:linear-gradient(120deg,#2b204c,#58377e);color:white;min-height:230px;display:flex;align-items:center;justify-content:space-between;gap:12px}.stage:before{content:"";position:absolute;width:210px;height:400px;background:linear-gradient(#ffffff19,transparent);transform:rotate(25deg);right:50px;top:-150px;pointer-events:none}.stage h1{font-size:30px;line-height:1.4;margin:10px 0}.stage p{color:#e1d7f3;font-size:15px;line-height:1.7}.avatar{font-size:88px;position:relative;filter:drop-shadow(0 12px 20px #e794cf66);animation:float 4s ease-in-out infinite}.card{background:#fff;border:1px solid #eee8f5;border-radius:26px;padding:24px;margin-top:20px}.sidebar .card{margin:0 0 20px}.section-title h2{font-size:18px;margin:0}.section-title small{font-size:12px}.wordcard{text-align:center}.lesson-label{font-size:12px;letter-spacing:2px;font-weight:800;color:#8a71a9}.emoji{font-size:76px;margin:18px 0 0}.word{font-size:40px;font-weight:900;letter-spacing:-1px;margin:4px 0}.meaning{font-size:21px;color:#81768f;margin:4px 0 20px}.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.primary{background:#7954cd;color:#fff;box-shadow:0 5px 12px #7954cd22}.pink{background:#ffe7f1;color:#a33c72}.divider{border-top:1px solid #f0eaf5;margin-top:24px;padding-top:18px}.nav{display:flex;justify-content:space-between;align-items:center;margin-top:22px}.nav button{background:transparent}.progress{height:10px;border-radius:20px;background:#f0eaf7;overflow:hidden;margin:14px 0 8px}.progress div{height:100%;background:linear-gradient(90deg,#be85e9,#ec90b6);transition:width .4s}.level{font-size:24px;font-weight:850;margin:18px 0 3px}.stats{display:flex;gap:12px;margin-top:20px}.stat{flex:1;border-radius:17px;background:#f8f5ff;padding:13px;font-size:13px}.stat strong{display:block;font-size:23px;margin-top:5px}.mission{display:flex;align-items:center;gap:12px;margin-top:20px}.mission-icon{background:#f7f1ff;border-radius:14px;padding:10px;font-size:22px}.mission-text{flex:1;font-size:14px}.mission-text small{display:block;margin-top:4px}.check{font-size:13px;color:#7650b7;font-weight:800}.note{line-height:1.8;font-size:14px;color:#85738e}.options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.option{background:white;border:2px solid #e8dff3}.option.good{background:#e7f8ef;border-color:#40916c;opacity:1}.option.bad{background:#fff0f4;border-color:#cd7799;opacity:1}#feedback{min-height:26px;font-weight:700;margin-top:16px;color:#6a428c}#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);padding:15px 22px;border-radius:20px;background:#302244;color:white;box-shadow:0 6px 30px #30224433;z-index:10;max-width:90%;text-align:center}#toast:empty{display:none}.spark{position:fixed;top:-25px;z-index:20;pointer-events:none;font-size:24px;animation:fall 1.5s ease-in forwards}footer{text-align:center;margin-top:22px;font-size:12px;color:#8d819c}#storageWarning{color:#96415d;font-size:13px}
+@keyframes float{50%{transform:translateY(-8px) rotate(3deg)}}@keyframes fall{to{transform:translateY(95vh) rotate(260deg);opacity:0}}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.sidebar{display:grid;grid-template-columns:1fr 1fr;gap:16px}.sidebar .card{margin:0}.sidebar .note{grid-column:1/-1}.stage{min-height:210px}}
+@media(max-width:520px){main{padding:20px 14px}.brand{font-size:17px}header .pill{font-size:12px;padding:8px 11px}.stage{padding:23px}.stage h1{font-size:24px}.avatar{font-size:65px}.sidebar{grid-template-columns:1fr}.card{padding:20px}.word{font-size:34px}.actions button{flex:1}.stage p{font-size:13px}}
+@media(prefers-reduced-motion:reduce){*,*:before{animation:none!important;transition:none!important}}
+</style></head>
+<body><main>
+<header><div class="brand">✦ MINA <span>ACADEMY</span></div><div class="pill">🎧 我的英文練習室</div></header>
+<div class="layout"><section>
+<div class="stage"><div><div class="tag">YOUR DEBUT STARTS HERE</div><h1>每一句英文，<br>都讓舞台更靠近一點。</h1><p id="minaText">我是 Mina！今天一起練習，閃閃發光吧。 ✨</p></div><div class="avatar" aria-hidden="true">👩🏻‍🎤</div></div>
+<div class="card wordcard"><div class="section-title"><h2>🎙️ Vocal Lab · 單字練習</h2><small id="position"></small></div>
+<div class="divider"><div class="lesson-label">LISTEN · SAY · SHINE</div><div class="emoji" id="emoji"></div><div class="word" id="word"></div><div class="meaning" id="meaning"></div>
+<div class="actions"><button id="listen">🔊 聽發音</button><button id="know" class="pink">🎤 我跟著唸了</button><button id="challenge" class="primary">✦ 舞台小挑戰</button></div>
+<div id="quizArea" hidden><p id="question"></p><div id="options" class="options"></div><div id="feedback" role="status" aria-live="polite"></div></div>
+<div class="nav"><button id="previous" aria-label="上一個單字">← 上一個</button><small>練習一點點，也很棒</small><button id="next">下一個 →</button></div></div></div>
+</section><aside class="sidebar">
+<div class="card"><div class="section-title"><h2>🌟 我的出道之路</h2><small>TRAINEE PASS</small></div><div class="level" id="level"></div><small id="nextLevel"></small><div class="progress" role="progressbar" aria-label="舞台升級進度" aria-valuemin="0" aria-valuemax="100" id="levelProgress"><div id="levelBar"></div></div><div class="stats"><div class="stat">⭐ 星光值<strong id="stars">0</strong></div><div class="stat">💗 勇氣值<strong id="courage">0</strong></div></div></div>
+<div class="card"><div class="section-title"><h2>📝 今天的練習單</h2><small>慢慢來就好</small></div>
+<div class="mission"><div class="mission-icon">🎧</div><div class="mission-text">聽懂舞台的聲音<small>聽 3 個不同單字</small></div><div id="listenCount" class="check"></div></div>
+<div class="mission"><div class="mission-icon">🎤</div><div class="mission-text">勇敢開口練習<small>跟唸 3 個不同單字</small></div><div id="sayCount" class="check"></div></div>
+<div class="mission"><div class="mission-icon">✨</div><div class="mission-text">完成舞台小挑戰<small>答對 3 個不同單字</small></div><div id="quizCount" class="check"></div></div>
+<div class="divider"><small id="dailyMessage">完成三項任務，解鎖今日安可舞台 ✨</small></div></div>
+<div class="note">💌 Mina 的小提醒<br>答錯也沒關係，聽一次、再試一次。<br>今天練完了，就讓嗓子休息一下吧！</div>
+</aside></div><footer>MADE FOR YOUR LITTLE SUPERSTAR · 不用登入，進度自動保存在這個裝置</footer><p id="storageWarning" role="status"></p>
+</main><div id="toast" role="status" aria-live="polite"></div><script src="app.js"></script></body></html>

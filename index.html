@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fff7fb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Mina English">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.svg">
+<title>Mina's English Academy</title>
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#fff7fb;color:#2a2433}
+.app{max-width:760px;margin:auto;padding:16px 16px 110px}
+.card{background:white;border:1px solid #eadfeb;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 8px 24px rgba(80,50,100,.08)}
+h1{font-size:24px;margin:0 0 6px}.muted{color:#756b80}
+.hero{display:grid;grid-template-columns:84px 1fr;gap:12px;align-items:center}
+.mina{width:84px;height:84px;border-radius:22px;background:linear-gradient(135deg,#ff9ac7,#9b84ff);display:flex;align-items:center;justify-content:center;font-size:42px}
+.word{text-align:center;font-size:40px;font-weight:900;margin:12px 0}.emoji{text-align:center;font-size:76px}
+.zh{text-align:center;font-size:22px}.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+button{border:0;border-radius:16px;padding:13px 16px;font-size:17px;font-weight:800;background:#eee8f5}
+.primary{background:linear-gradient(135deg,#ff6fae,#7b61ff);color:#fff}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.option{background:#fff;border:2px solid #eadfeb}.good{border-color:#20a66a;background:#ecfff6}.bad{border-color:#d94c66;background:#fff0f3}
+.footer{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.94);border-top:1px solid #eadfeb;padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;gap:10px;justify-content:center}
+.footer button{flex:1;max-width:280px}
+.stats{display:flex;gap:8px;margin-top:10px}.pill{background:#fff;border:1px solid #eadfeb;border-radius:999px;padding:8px 10px;font-weight:700}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="card">
+    <h1>🎤 Mina's English Academy</h1>
+    <div class="muted">K-pop 練習生英文任務</div>
+    <div class="stats"><div class="pill">⭐ <span id="stars">0</span></div><div class="pill">💗 Courage <span id="courage">0</span></div></div>
+  </div>
+
+  <div class="card hero">
+    <div class="mina">👩🏻‍🎤</div>
+    <div><b>Mina：</b><span id="minaText">Hi! Let's learn English together.</span>
+      <div class="row" style="justify-content:flex-start"><button onclick="speakCurrent()">🔊 聽發音</button></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="emoji" id="emoji">🍎</div>
+    <div class="word" id="word">apple</div>
+    <div class="zh" id="zh">蘋果</div>
+    <div class="row">
+      <button onclick="markKnow()">👍 我會了</button>
+      <button class="primary" onclick="quiz()">🎯 小挑戰</button>
+    </div>
+    <div id="quizArea"></div>
+  </div>
+</div>
+
+<div class="footer">
+<button onclick="prevWord()">← 上一個</button>
+<button class="primary" onclick="nextWord()">下一個 →</button>
+</div>
+
+<script>
+const words=[
+["👦","boy","男孩"],["🤝","friend","朋友"],["👧","girl","女孩"],["🧑‍🏫","teacher","教師"],
+["🧑‍⚕️","doctor","醫生"],["🧒","kid","小孩"],["🎓","student","學生"],["👦🏻","brother","兄弟"],
+["👨","father / dad","爸爸"],["👩","mother / mom","媽媽"],["👧🏻","sister","姐妹"],["👵","grandma","奶奶、外婆"],
+["👴","grandpa","爺爺、外公"],["🍎","apple","蘋果"],["🍌","banana","香蕉"],["🍰","cake","蛋糕"],
+["🥚","egg","蛋"],["🥛","milk","牛奶"],["🍚","rice","米、飯"],["🍵","tea","茶"],["💧","water","水"],
+["🧃","juice","果汁"],["🍔","hamburger","漢堡"],["🍨","ice cream","冰淇淋"],["🍊","orange","柳丁"],
+["🍕","pizza","披薩"],["🌅","breakfast","早餐"],["☀️","lunch","午餐"],["🌙","dinner","晚餐"],["🎒","bag","書包"],["⚽","ball","球"]
+];
+const state=JSON.parse(localStorage.getItem("minaState")||'{"stars":0,"courage":0}');
+let i=Number(localStorage.getItem("minaIndex")||0);
+function save(){localStorage.setItem("minaState",JSON.stringify(state));localStorage.setItem("minaIndex",i);renderStats()}
+function renderStats(){stars.textContent=state.stars;courage.textContent=state.courage}
+function render(){const w=words[i];emoji.textContent=w[0];word.textContent=w[1];zh.textContent=w[2];minaText.textContent=`Listen and say: ${w[1]}. 中文是「${w[2]}」。`;quizArea.innerHTML=""}
+function nextWord(){i=(i+1)%words.length;render();save()}
+function prevWord(){i=(i-1+words.length)%words.length;render();save()}
+function speakCurrent(){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(words[i][1].replace(" / "," or "));u.lang="en-US";u.rate=.9;u.pitch=1.05;speechSynthesis.speak(u)}
+function markKnow(){state.stars++;state.courage++;save();minaText.textContent="Great job! 再練一次會更熟。"}
+function quiz(){
+ const target=words[i]; const picks=[target];
+ while(picks.length<4){const w=words[Math.floor(Math.random()*words.length)]; if(!picks.includes(w))picks.push(w)}
+ picks.sort(()=>Math.random()-.5);
+ quizArea.innerHTML=`<div style="margin-top:18px;text-align:center;font-weight:800">哪一個是「${target[2]}」？</div><div class="options">${picks.map(w=>`<button class="option" onclick="answer(this,'${w[1].replaceAll("'","\'")}','${target[1].replaceAll("'","\'")}')">${w[1]}</button>`).join("")}</div><div id="fb" style="text-align:center;font-weight:800;margin-top:10px"></div>`;
+}
+function answer(btn,a,t){if(a===t){btn.classList.add("good");fb.textContent="✅ Correct!";state.stars+=2;state.courage+=2}else{btn.classList.add("bad");fb.textContent=`答案是 ${t}`;state.courage++}save()}
+if("serviceWorker" in navigator){addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
+renderStats();render();
+</script>
+</body></html>

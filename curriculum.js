@@ -1,8 +1,29 @@
 "use strict";
 const CURRICULUM={
-  "version": 3,
-  "source": "使用者提供的英文學習表（12 頁）",
+  "version": 4,
+  "source": "使用者提供的英文學習表（12 頁）與課本照片",
   "groups": [
+    {
+      "id": "unit-1-words",
+      "name": "Unit 1 國家與來源",
+      "emoji": "🌏",
+      "kind": "word",
+      "count": 9
+    },
+    {
+      "id": "unit-1-phonics",
+      "name": "Unit 1 自然發音",
+      "emoji": "🔤",
+      "kind": "word",
+      "count": 8
+    },
+    {
+      "id": "unit-1-sentences",
+      "name": "Unit 1 來自哪裡",
+      "emoji": "🎙️",
+      "kind": "pattern",
+      "count": 2
+    },
     {
       "id": "people",
       "name": "人物",
@@ -5724,6 +5745,222 @@ const CURRICULUM={
       "kind": "pattern",
       "en": "How much is it?",
       "zh": "這多少錢？"
+    },
+    {
+      "id": "unit-1-word-australia",
+      "en": "Australia",
+      "zh": "澳大利亞",
+      "emoji": "🇦🇺",
+      "source": "Unit 1／Words",
+      "reference": "課本照片 Unit 1 · Words",
+      "group": "unit-1-words",
+      "kind": "word",
+      "variants": [{ "en": "Australia", "zh": "澳大利亞" }]
+    },
+    {
+      "id": "unit-1-word-india",
+      "en": "India",
+      "zh": "印度",
+      "emoji": "🇮🇳",
+      "source": "Unit 1／Words",
+      "reference": "課本照片 Unit 1 · Words",
+      "group": "unit-1-words",
+      "kind": "word",
+      "variants": [{ "en": "India", "zh": "印度" }]
+    },
+    {
+      "id": "unit-1-word-japan",
+      "en": "Japan",
+      "zh": "日本",
+      "emoji": "🇯🇵",
+      "source": "Unit 1／Words",
+      "reference": "課本照片 Unit 1 · Words",
+      "group": "unit-1-words",
+      "kind": "word",
+      "variants": [{ "en": "Japan", "zh": "日本" }]
+    },
+    {
+      "id": "unit-1-word-singapore",
+      "en": "Singapore",
+      "zh": "新加坡",
+      "emoji": "🇸🇬",
+      "source": "Unit 1／Words",
+      "reference": "課本照片 Unit 1 · Words",
+      "group": "unit-1-words",
+      "kind": "word",
+      "variants": [{ "en": "Singapore", "zh": "新加坡" }]
+    },
+    {
+      "id": "unit-1-word-spain",
+      "en": "Spain",
+      "zh": "西班牙",
+      "emoji": "🇪🇸",
+      "source": "Unit 1／Words",
+      "reference": "課本照片 Unit 1 · Words",
+      "group": "unit-1-words",
+      "kind": "word",
+      "variants": [{ "en": "Spain", "zh": "西班牙" }]
+    },
+    {
+      "id": "unit-1-word-taiwan",
+      "en": "Taiwan",
+      "zh": "臺灣",
+      "emoji": "🇹🇼",
+      "source": "Unit 1／Words",
+      "reference": "課本照片 Unit 1 · Words",
+      "group": "unit-1-words",
+      "kind": "word",
+      "variants": [{ "en": "Taiwan", "zh": "臺灣" }]
+    },
+    {
+      "id": "unit-1-word-uk",
+      "en": "the UK",
+      "zh": "英國",
+      "emoji": "🇬🇧",
+      "source": "Unit 1／Words",
+      "reference": "課本照片 Unit 1 · Words",
+      "group": "unit-1-words",
+      "kind": "word",
+      "variants": [{ "en": "the UK", "zh": "英國" }]
+    },
+    {
+      "id": "unit-1-word-usa",
+      "en": "the USA",
+      "zh": "美國",
+      "emoji": "🇺🇸",
+      "source": "Unit 1／Words",
+      "reference": "課本照片 Unit 1 · Words",
+      "group": "unit-1-words",
+      "kind": "word",
+      "variants": [{ "en": "the USA", "zh": "美國" }]
+    },
+    {
+      "id": "unit-1-word-from",
+      "en": "from",
+      "zh": "來自",
+      "emoji": "📍",
+      "source": "Unit 1／Words",
+      "reference": "課本照片 Unit 1 · Words",
+      "group": "unit-1-words",
+      "kind": "word",
+      "variants": [{ "en": "from", "zh": "來自" }]
+    },
+    {
+      "id": "unit-1-phonics-bird",
+      "en": "bird",
+      "zh": "鳥",
+      "emoji": "🐦",
+      "source": "Unit 1／Phonics Words",
+      "reference": "課本照片 Unit 1 · Phonics Words",
+      "group": "unit-1-phonics",
+      "kind": "word",
+      "variants": [{ "en": "bird", "zh": "鳥" }]
+    },
+    {
+      "id": "unit-1-phonics-circle",
+      "en": "circle",
+      "zh": "圓圈",
+      "emoji": "⭕",
+      "source": "Unit 1／Phonics Words",
+      "reference": "課本照片 Unit 1 · Phonics Words",
+      "group": "unit-1-phonics",
+      "kind": "word",
+      "variants": [{ "en": "circle", "zh": "圓圈" }]
+    },
+    {
+      "id": "unit-1-phonics-dirty",
+      "en": "dirty",
+      "zh": "髒的",
+      "emoji": "🫧",
+      "source": "Unit 1／Phonics Words",
+      "reference": "課本照片 Unit 1 · Phonics Words",
+      "group": "unit-1-phonics",
+      "kind": "word",
+      "variants": [{ "en": "dirty", "zh": "髒的" }]
+    },
+    {
+      "id": "unit-1-phonics-shirt",
+      "en": "shirt",
+      "zh": "襯衫",
+      "emoji": "👕",
+      "source": "Unit 1／Phonics Words",
+      "reference": "課本照片 Unit 1 · Phonics Words",
+      "group": "unit-1-phonics",
+      "kind": "word",
+      "variants": [{ "en": "shirt", "zh": "襯衫" }]
+    },
+    {
+      "id": "unit-1-phonics-curry",
+      "en": "curry",
+      "zh": "咖哩",
+      "emoji": "🍛",
+      "source": "Unit 1／Phonics Words",
+      "reference": "課本照片 Unit 1 · Phonics Words",
+      "group": "unit-1-phonics",
+      "kind": "word",
+      "variants": [{ "en": "curry", "zh": "咖哩" }]
+    },
+    {
+      "id": "unit-1-phonics-nurse",
+      "en": "nurse",
+      "zh": "護理師",
+      "emoji": "🧑‍⚕️",
+      "source": "Unit 1／Phonics Words",
+      "reference": "課本照片 Unit 1 · Phonics Words",
+      "group": "unit-1-phonics",
+      "kind": "word",
+      "variants": [{ "en": "nurse", "zh": "護理師" }]
+    },
+    {
+      "id": "unit-1-phonics-purple",
+      "en": "purple",
+      "zh": "紫色（的）",
+      "emoji": "🟣",
+      "source": "Unit 1／Phonics Words",
+      "reference": "課本照片 Unit 1 · Phonics Words",
+      "group": "unit-1-phonics",
+      "kind": "word",
+      "variants": [{ "en": "purple", "zh": "紫色（的）" }]
+    },
+    {
+      "id": "unit-1-phonics-thursday",
+      "en": "Thursday",
+      "zh": "星期四",
+      "emoji": "📅",
+      "source": "Unit 1／Phonics Words",
+      "reference": "課本照片 Unit 1 · Phonics Words",
+      "group": "unit-1-phonics",
+      "kind": "word",
+      "variants": [{ "en": "Thursday", "zh": "星期四" }]
+    },
+    {
+      "id": "unit-1-sentence-origin",
+      "en": "Where are you from?",
+      "zh": "你來自哪裡？",
+      "emoji": "🌏",
+      "source": "Unit 1／Sentences",
+      "reference": "課本照片 Unit 1 · Sentences",
+      "group": "unit-1-sentences",
+      "kind": "pattern",
+      "variants": [
+        { "en": "Where are you from?", "zh": "你來自哪裡？" },
+        { "en": "I'm from Taiwan.", "zh": "我來自臺灣。" }
+      ]
+    },
+    {
+      "id": "unit-1-sentence-she",
+      "en": "Is she from India?",
+      "zh": "她來自印度嗎？",
+      "emoji": "👧",
+      "source": "Unit 1／Sentences",
+      "reference": "課本照片 Unit 1 · Sentences",
+      "group": "unit-1-sentences",
+      "kind": "pattern",
+      "variants": [
+        { "en": "Is she from India?", "zh": "她來自印度嗎？" },
+        { "en": "Yes, she is.", "zh": "是的，她是。" },
+        { "en": "No, she isn't. She's from the UK.", "zh": "不，她不是。她來自英國。" }
+      ]
     }
   ]
 };

@@ -35,7 +35,7 @@ function stopSpeech(){speechRun++;if("speechSynthesis" in window)speechSynthesis
 function render(){stopSpeech();activeQuiz=null;$("quizArea").hidden=true;$("meaning").hidden=false;$("options").replaceChildren();$("feedback").textContent="";
 const entry=current(),v=line();$("emoji").textContent=entry.emoji;$("word").textContent=v.en;$("word").classList.toggle("sentence",entry.kind!=="word");$("meaning").textContent=v.zh;
 const p=pool();$("position").textContent=(p.findIndex(e=>e.id===entry.id)+1)+" / "+p.length;
-$("source").textContent="學習表 PDF 第 "+entry.page+" 頁 · "+entry.source;
+$("source").textContent=entry.reference||("學習表 PDF 第 "+entry.page+" 頁 · "+entry.source);
 $("variantControl").hidden=entry.variants.length<2;fillSelect("variant",entry.variants.map((v,n)=>[String(n),(n+1)+". "+v.en]),String(variant));menus();stats()}
 function choose(id){const next=items.findIndex(e=>e.id===id);if(next<0)return;i=next;variant=0;render();persist()}
 function move(delta){const p=pool(),pos=p.findIndex(e=>e.id===current().id);choose(p[(pos+delta+p.length)%p.length].id)}
@@ -63,4 +63,3 @@ $("challenge").addEventListener("click",quiz);$("previous").addEventListener("cl
 document.addEventListener("visibilitychange",()=>{if(!document.hidden){stats();persist()}});
 if("serviceWorker" in navigator&&location.protocol!=="file:"){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{$("storageWarning").textContent="離線功能尚未啟用；目前仍可在線上練習。"}))}
 rollDay();render();persist();
-
